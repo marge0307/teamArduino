@@ -45,9 +45,7 @@ public class main {
     	   connect.delete(id);  
     	   System.out.print("Succesfully Deleted!");
        }
-       else if(in == 5){
-    	   
-       }
+      
     }
     
     

@@ -19,7 +19,16 @@ public class Listener implements ActionListener{
 		if(e.getSource().equals(SendPanel.btnSubmit))
 		{
 			String name = SendPanel.txtName.getText();
-			db.select(name);
+			if(db.selectName(name))
+			{
+				SendPanel.coinPanel.setVisible(true);
+				SendPanel.btnSend.setVisible(true);
+				SendPanel.txtName.setEnabled(false);
+			}
+		}
+		if(e.getSource().equals(SendPanel.btnSend))
+		{
+			db.updateData(SendPanel.txtName.getText(),SerialListener.coins);
 		}
 	}
 

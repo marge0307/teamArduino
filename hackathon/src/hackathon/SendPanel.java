@@ -10,14 +10,22 @@ import javax.swing.JTextField;
 
 public class SendPanel extends JPanel{
 	public static JTextField txtName;
-	public static JButton btnSubmit;
+	public static JButton btnSubmit, btnSend;
 	private JLabel lblName;
+	public SerialListener serialListener;
+	public static JPanel coinPanel;
+	private JLabel lblInsertCoin;
+	public static JLabel lblAmount;
 	public void sendPanel()
 	{
+		btnSend = new JButton("Send");
+		lblAmount = new JLabel();
+		lblInsertCoin = new JLabel("Received Money:     ");
+		coinPanel = new JPanel();
 		txtName = new JTextField();
 		btnSubmit = new JButton("Submit");
 		lblName = new JLabel("Name:");
-		
+		serialListener = new SerialListener("SendPanel");
 		add(txtName);
 		add(btnSubmit);
 		add(lblName);
@@ -34,7 +42,26 @@ public class SendPanel extends JPanel{
 		setLayout(null);
 		setSize(1200,800);
 		btnSubmit.addActionListener(new Listener());
-		
+		serialListener.initialize();
+		serialListener.portConnect();
+		add(coinPanel);
+		coinPanel.setVisible(false);
+		coinPanel.add(lblInsertCoin);
+		coinPanel.add(lblAmount);
+		lblInsertCoin.setFont(lblInsertCoin.getFont().deriveFont(30.0f));
+		lblAmount.setFont(lblAmount.getFont().deriveFont(30.0f));
+		lblInsertCoin.setBounds(0, 0, 300, 50);
+		lblAmount.setBounds(300, 0, 100, 50);
+		coinPanel.setLayout(null);
+		coinPanel.setBackground(new Color(255,255,255,255));
+		coinPanel.setBounds(200, 400, 500, 50);
+		add(btnSend);
+		btnSend.setFont(btnSend.getFont().deriveFont(20.0f));
+		btnSend.setBackground(Color.GRAY);
+		btnSend.setForeground(Color.WHITE);
+		btnSend.setBounds(200, 500, 150, 50);
+		btnSend.setVisible(false);
+		btnSend.addActionListener(new Listener());
 	}
 
 }

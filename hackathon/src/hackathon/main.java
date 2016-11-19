@@ -1,3 +1,4 @@
+package hackathon;
 
 import java.util.Scanner;
 public class main {
@@ -44,6 +45,10 @@ public class main {
     	   
     	   connect.delete(id);  
     	   System.out.print("Succesfully Deleted!");
+       }
+       else if(in == 5){
+    	   String name = "whatever";
+    	   connect.select(name);
        }
       
     }

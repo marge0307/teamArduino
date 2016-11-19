@@ -1,4 +1,7 @@
+package hackathon;
 import java.sql.*;
+
+import javax.swing.JOptionPane;
 
 public class DBcon {
     private Connection con;
@@ -88,6 +91,29 @@ public class DBcon {
         		System.out.println(ex);
         	}
         }
+        public void select(String name){
+        	try{
+        		 int size = 0;
+        		 String query = "select * from test where anything = \""+name+"\"";
+                 rs = st.executeQuery(query);
+                 System.out.println("Records from Database");
+                 
+                 while(rs.next()){
+                    size++;
+                 }
+                
+                    
+             
+	            if (size > 0) {
+	            	JOptionPane.showMessageDialog(null, ("An existing user was updated successfully!"));
+	            }
+	            else{
+	            	JOptionPane.showMessageDialog(null,"No name found");
+	            }	
+        	}catch(Exception ex){
+        		System.out.println(ex);
+        	}
+        }
         public int withdraw(int anyupdate, int subtract){
             try{
                
@@ -95,8 +121,8 @@ public class DBcon {
                
                String sql = "UPDATE test SET anything=? WHERE id=?";
                PreparedStatement statement = con.prepareStatement(sql);
-               statement.setString(1, anyupdate);
-               statement.setInt(2, id);
+//               statement.setString(1, anyupdate);
+//               statement.setInt(2, id);
                
                int rowsUpdated = statement.executeUpdate();
                

@@ -70,6 +70,7 @@ public class SendPanel extends JPanel{
 		panelPop.add(lblTransNum);
 		lblTransNum.setBounds(50, 100, 450, 100);
 		lblTransNum.setFont(lblTransNum.getFont().deriveFont(30.0f));
+		lblTransNum.setForeground(Color.WHITE);
 		panelPop.setLayout(null);
 		panelPop.setVisible(false);
 		

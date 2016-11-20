@@ -29,6 +29,29 @@ public class Listener implements ActionListener{
 		if(e.getSource().equals(SendPanel.btnSend))
 		{
 			db.updateData(SendPanel.txtName.getText(),SerialListener.coins);
+			Thread pop = new Thread()
+					{
+						public void run()
+						{
+							String name = SendPanel.txtName.getText();
+							int coinz = SerialListener.coins;
+							int trans = DBcon.randomWithRange(1000000, 9999999);
+							
+							String accnum = db.selectforacc(name);
+							db.insertData(trans, coinz, accnum);
+							
+							SendPanel.lblTransNum.setText("Your transaction no. "+trans);
+							SendPanel.panelPop.setVisible(true);
+							try {
+								Thread.sleep(5000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							SendPanel.panelPop.setVisible(false);
+						}
+					};
+			pop.start();
 		}
 	}
 

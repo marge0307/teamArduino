@@ -43,21 +43,41 @@ public class DBcon {
               
         }
         
-        public void insertData(int amount, String name){
+        public void insertData(int tran, int amount, String accnum){
              try{
                 
-                String query = " insert into test (amount)"
-                                + " values (?) where name = ?";
-                PreparedStatement preparedStmt = con.prepareStatement(query);
-                preparedStmt.setInt (1, amount);
-                preparedStmt.setString (2, name);
-                preparedStmt.execute();
+                String query = " insert into transactions (transaction, amount, accnum)"
+                                + " values (?, ?, ?)";
+                PreparedStatement preparedStatement = con.prepareStatement(query);
+				preparedStatement.setInt (1, tran);
+                preparedStatement.setInt (2, amount);
+                preparedStatement.setString (3, accnum);
+                
+                preparedStatement.execute();
                 
                 System.out.println("Data inserted!");
                         
             }catch(Exception ex){
                 System.out.println(ex);
             }
+        }
+        
+        public String selectforacc(String name){
+        	try{
+        		String cp = "";
+           	 	String query = "select * from test where name = \""+name+"\"";
+                rs = st.executeQuery(query);
+                
+                while(rs.next()){
+                    cp = rs.getString("cp");
+                }
+                return cp;
+                
+        	}catch(Exception x){
+        		System.out.print(x);
+        		return "";
+        	}
+        	
         }
         
         public void updateData(String name, int amount){
@@ -94,7 +114,7 @@ public class DBcon {
             }
         }
         
-        int randomWithRange(int min, int max)
+        public static int randomWithRange(int min, int max)
             {
                 int range = (max - min) + 1;
                 return (int)(Math.random() * range) + min;

@@ -13,11 +13,13 @@ public class SendPanel extends JPanel{
 	public static JButton btnSubmit, btnSend;
 	private JLabel lblName;
 	public SerialListener serialListener;
-	public static JPanel coinPanel;
+	public static JPanel coinPanel, panelPop;
 	private JLabel lblInsertCoin;
-	public static JLabel lblAmount;
+	public static JLabel lblAmount, lblTransNum;
 	public void sendPanel()
 	{
+		lblTransNum = new JLabel();
+		panelPop = new JPanel();
 		btnSend = new JButton("Send");
 		lblAmount = new JLabel();
 		lblInsertCoin = new JLabel("Received Money:     ");
@@ -26,6 +28,7 @@ public class SendPanel extends JPanel{
 		btnSubmit = new JButton("Submit");
 		lblName = new JLabel("Name:");
 		serialListener = new SerialListener("SendPanel");
+		add(panelPop);
 		add(txtName);
 		add(btnSubmit);
 		add(lblName);
@@ -62,6 +65,14 @@ public class SendPanel extends JPanel{
 		btnSend.setBounds(200, 500, 150, 50);
 		btnSend.setVisible(false);
 		btnSend.addActionListener(new Listener());
+		panelPop.setBounds(350, 250, 500, 300);
+		panelPop.setBackground(new Color(200,200,200, 255));
+		panelPop.add(lblTransNum);
+		lblTransNum.setBounds(50, 100, 450, 100);
+		lblTransNum.setFont(lblTransNum.getFont().deriveFont(30.0f));
+		panelPop.setLayout(null);
+		panelPop.setVisible(false);
+		
 	}
 
 }
